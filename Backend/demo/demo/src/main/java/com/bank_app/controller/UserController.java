@@ -1,4 +1,3 @@
-
 package com.bank_app.controller;
 
 import com.bank_app.models.User;
@@ -11,31 +10,38 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
-    private UserService userService;  // Inject UserService
+    private UserService userService;
 
-    // Register a new user
+    // Endpoint to register a new user
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@Valid @RequestBody User user, BindingResult bindingResult) {
-        // Check if there are validation errors
+        // Validate the user data
         if (bindingResult.hasErrors()) {
-            // If errors, return the validation errors to the frontend
-            List<String> errors = bindingResult.getAllErrors().stream()
-                    .map(error -> error.getDefaultMessage()) // Extract error messages
-                    .toList();
-
-            return ResponseEntity.badRequest().body(errors); // Send back the errors with 400 Bad Request
+            List<String> errors = bindingResult.getAllErrors()
+                    .stream()
+                    .map(error -> error.getDefaultMessage())
+                    .collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(errors);
         }
 
-        // Save the user using the service
-        User registeredUser = userService.registerUser(user);  // Call the instance method of userService
+        // Save the user
+        User savedUser = userService.registerUser(user);
 
         // Return success response
-        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED); // Return the registered user
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+    }
+
+    // Optional: Endpoint to fetch all registered users
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
 }
