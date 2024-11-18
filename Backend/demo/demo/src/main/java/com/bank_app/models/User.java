@@ -2,7 +2,6 @@ package com.bank_app.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,19 +13,19 @@ public class User {
     private int user_id;
 
     @NotEmpty(message = "The First name field cannot be empty")
-    @Size(min = 3, message = "The First name field must greater than 3 characters")
+    @Size(min = 3, message = "The First name field must be greater than 3 characters")
     private String first_name;
 
     @NotEmpty(message = "The Last name field cannot be empty")
-    @Size(min = 3, message = "The Last name field must greater than 3 characters")
+    @Size(min = 1, message = "The Last name field must have at least 1 character")
     private String last_name;
 
     @Email
-    @NotEmpty
+    @NotEmpty(message = "Email cannot be empty")
     private String email;
 
-    @NotEmpty
-    @NotNull
+    @NotEmpty(message = "Password cannot be empty")
+    @NotNull(message = "Password cannot be null")
     private String password;
 
     private String token;
@@ -37,7 +36,6 @@ public class User {
 
     @Column(name = "verified_at")
     private LocalDateTime verified_at = null;  // Default value is null
-
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime created_at;

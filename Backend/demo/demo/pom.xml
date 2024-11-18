@@ -27,18 +27,12 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<!-- H2 Database for testing (you can replace this with your actual DB) -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -70,17 +64,9 @@
 			<version>3.1.0</version>  <!-- Update to the latest version compatible with Spring Boot 3 -->
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<version>10.1.9</version>  <!-- Use a 10.x version -->
 			<scope>provided</scope>
 		</dependency>
 
@@ -96,27 +82,9 @@
 			<dependency>
 				<groupId>jakarta.servlet</groupId>
 				<artifactId>jakarta.servlet-api</artifactId>
-				<version>6.0.0</version> <!-- Jakarta EE 9.1 or 10.x is supported -->
+				<version>6.1.0</version> <!-- Jakarta EE 9.1 or 10.x is supported -->
 				<scope>provided</scope>
 			</dependency>
-
-			<!-- Jakarta JSP API (Spring Boot 3.x uses Jakarta EE for JSP support) -->
-			<dependency>
-				<groupId>jakarta.servlet.jsp</groupId>
-				<artifactId>jakarta.servlet.jsp-api</artifactId>
-				<version>3.1.0</version> <!-- This is compatible with Spring Boot 3.x -->
-				<scope>provided</scope>
-			</dependency>
-
-			<!-- JSTL (JavaServer Pages Standard Tag Library) -->
-			<dependency>
-				<groupId>jakarta.servlet.jsp.jstl</groupId>
-				<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-				<version>2.0.0</version> <!-- Compatible with Spring Boot 3.x -->
-			</dependency>
-
-
-
 		<!-- Spring Security Crypto (for cryptography support) -->
 			<dependency>
 				<groupId>org.springframework.security</groupId>
@@ -124,10 +92,11 @@
 				<version>5.7.5</version> <!-- Compatible with Spring Boot 3.x -->
 			</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+
 	</dependencies>
 
 	<build>
